@@ -32,6 +32,43 @@ router.route('/passport/register').post((req, res) => {
     });
 });
 
+// Retrieve a user
+router.route('/passport/user/:id').get((req, res) => {
+  let userId = req.params.id;
+  passportClient.retrieveUser(userId)
+    .then((response) => {
+      res.send(response.successResponse);
+    })
+    .catch((response) => {
+      res.status(response.statusCode).send(response.errorResponse);
+    });
+});
+
+// Retrieve a user registration
+router.route('/passport/registration/:id').get((req, res) => {
+  let userId = req.params.id;
+  passportClient.retrieveRegistration(userId, config.passport.applicationId )
+    .then((response) => {
+      res.send(response.successResponse);
+    })
+    .catch((response) => {
+      res.status(response.statusCode).send(response.errorResponse);
+    });
+});
+
+// update a user registration
+router.route('/passport/update/:id').put((req, res) => {  
+  let userId = req.params.id;
+  passportClient.updateRegistration(userId, req.body )
+    .then((response) => {
+      res.send(response.successResponse);
+    })
+    .catch((response) => {
+      res.status(response.statusCode).send(response.errorResponse);
+    });
+});
+
+
 router.route('/passport/webhook').post((req, res) => {
   const authorization = req.header('Authorization');
   if (authorization !== 'API-KEY') {
