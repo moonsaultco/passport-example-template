@@ -5,3 +5,26 @@ body {
   font-size: 1.1em;
   line-height: 1.3em;
 }
+
+button.button {
+  font-size: 120%;
+  font-weight: bold;
+  display: block;
+  min-width: 10em;
+  padding: 7px;
+  margin: .5em 3em;
+  text-align: center;
+  background-color: #eee;
+  border-color: rgba(0,0,0,0.3);
+  border-radius: 1em;
+}
+
+.button.basic {
+  background-color: #375989;
+  color: white;
+}
+
+.button.deluxe {
+  background-color: #25B696;
+  color: white;
+}
