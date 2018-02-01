@@ -7,16 +7,15 @@ body {
 }
 
 button.button {
-  font-size: 120%;
+  font-size: 110%;
   font-weight: bold;
-  display: block;
   min-width: 10em;
   padding: 7px;
-  margin: .5em 3em;
+  margin: .5em .5em;
   text-align: center;
   background-color: #eee;
   border-color: rgba(0,0,0,0.3);
-  border-radius: 1em;
+  border-radius: 3px;
 }
 
 .button.basic {
