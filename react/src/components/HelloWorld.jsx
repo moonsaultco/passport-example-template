@@ -24,12 +24,11 @@ class HelloWorld extends Component {
     this.state = {
         userId: JSON.parse(localStorage.user).id
     };
-
+    
     this.load = this.load.bind(this);
     this._handleAJAXResponse = this._handleAJAXResponse.bind(this);
     this.retrieveReg = this.retrieveReg.bind(this);
     this.update = this.update.bind(this);
-
   }
 
   componentDidMount() {
@@ -50,23 +49,23 @@ class HelloWorld extends Component {
   
   retrieveReg() {
     var plan = 'no plan chosen';
-    fetch(this.state.config.backend.url + '/api/passport/registration/' + this.state.userId)
+    window.fetch(this.state.config.backend.url + '/api/passport/registration/' + this.state.userId)
     .then(function(response) { return response.json(); })
     .then(
       (result) => { 
-          if (result.registration.data){
-              if (result.registration.data.attributes.plan) {plan = result.registration.data.attributes.plan}
+          if (result.registration.data && result.registration.data && result.registration.data.attributes ){
+              plan = result.registration.data.attributes.plan
           };
           
           this.setState({
-              result,
+              result: result,
               plan: plan
             });
       },
       (error) => {
         // just adding the error object to state, if it occurs
         this.setState({
-          error
+          error: error
         });
       }
     )
@@ -75,12 +74,12 @@ class HelloWorld extends Component {
   update(plan, e) {
     e.preventDefault();
     var request = this.state.result;
-    request.registration['data'] = {
+    request.registration.data = {
       attributes: {
         plan: plan
       }  
     };    
-    fetch(this.state.config.backend.url + '/api/passport/update/' + this.state.userId, {
+    window.fetch(this.state.config.backend.url + '/api/passport/update/' + this.state.userId, {
        method: 'PUT',
        body: JSON.stringify(request), 
        headers: new Headers({
@@ -91,7 +90,7 @@ class HelloWorld extends Component {
     .then(
       (response) => { 
         //console.log('Success:', response)
-        this.retrieveReg();
+        this.setState({plan: plan});
       }
     )  
   }
