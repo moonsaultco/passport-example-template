@@ -56,7 +56,7 @@ class HelloWorld extends Component {
           if (result.registration.data && result.registration.data && result.registration.data.attributes ){
               plan = result.registration.data.attributes.plan
           };
-          
+          //console.log(result);
           this.setState({
               result: result,
               plan: plan
