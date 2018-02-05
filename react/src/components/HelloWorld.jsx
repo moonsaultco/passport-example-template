@@ -53,7 +53,7 @@ class HelloWorld extends Component {
     .then(function(response) { return response.json(); })
     .then(
       (result) => { 
-          if (result.registration.data && result.registration.data && result.registration.data.attributes ){
+          if (result.registration && result.registration.data && result.registration.data.attributes ){
               plan = result.registration.data.attributes.plan
           };
           //console.log(result);
